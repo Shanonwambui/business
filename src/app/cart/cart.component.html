@@ -1,0 +1,70 @@
+
+<div class="page-title-area page-title-img-one">
+<div class="container">
+<div class="page-title-item">
+<h2>Cart</h2>
+<ul>
+<li>
+<a href="index.html">Home</a>
+</li>
+<li>
+<i class='bx bx-chevron-right'></i>
+</li>
+<li>Cart</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<section class="cart-area ptb-100">
+<div class="container">
+<div class="cart-wrap">
+<table class="table">
+<thead class="thead">
+<tr>
+ 
+<th class="table-head" scope="col">Items</th>
+<th class="table-head" scope="col">Type</th>
+<th class="table-head" scope="col">Quantity</th>
+<th class="table-head" scope="col">Prices</th>
+<th class="table-head" scope="col">Total Prices</th>
+<th class="table-head" scope="col">Remove</th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let item of carts">
+<td>{{ item.itemId.name }}</td>
+
+<td>{{ item.selectedType.name }}</td>
+
+<td class="quantity"> 
+    <button  (click)="incrementQuantity(item)"><i class="fa-regular fa-square-plus"></i></button>
+    {{ item.quantity }}
+    <button (click)="decrementQuantity(item)"><i class="fa-regular fa-square-minus"></i></button>
+</td>
+<td>{{ item.itemId.price }}</td>
+<td class="text-right">
+    <h5 class="font-medium m-b-30">{{ item.total }}</h5>
+  </td>
+
+<td>
+<a (click)="removeItem(item)">
+<i class='bx bx-x'></i>
+</a>
+</td>
+</tr>
+
+</tbody>
+</table>
+<div class="shop-back">
+<a href="#">Go for Order?</a>
+</div>
+<div class="total-shopping">
+<h2>Total Order</h2>
+<h3>Total: <span>{{ subTotal }}</span></h3>
+<a routerLink="/checkout">Checkout Items</a>
+</div>
+</div>
+</div>
+</section>

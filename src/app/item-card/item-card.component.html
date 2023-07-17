@@ -1,0 +1,42 @@
+<div class="collection-item" >
+  <div class="collection-top" >
+  <img src="assets/img/home-one/collection/1.jpg" alt="Collection">
+  <ul>
+  <li>
+  <i class='bx bxs-star checked'></i>
+  </li>
+  <li>
+  <i class='bx bxs-star checked'></i>
+  </li>
+  <li>
+  <i class='bx bxs-star checked'></i>
+  </li>
+  <li>
+  <i class='bx bxs-star checked'></i>
+  </li>
+  <li>
+  <i class='bx bxs-star checked'></i>
+  </li>
+  </ul>
+  <div class="add-cart">
+  <a href="#">
+  <i class='bx bxs-cart'></i>
+  Add to Cart
+  </a>
+  </div>
+  </div>
+  <div class="collection-bottom" >
+  <h3>{{ item.name }}</h3>
+  <ul>
+  <li>
+  <span>{{ item.price | currency: 'KES'}}</span>
+  </li>
+  <li>
+  <div class="number">
+  <span class="minus" (click)="removeQuantity()">-</span>
+  <input type="text" class="form-control" value="0" />
+  <span class="plus" (click)="addToCart()">+</span>
+  </div>
+  </li>
+  </ul>
+  </div>

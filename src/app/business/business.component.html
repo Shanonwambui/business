@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="business.component.css">
+<section class="error-area">
+<div class="error-item">
+<div class="d-table">
+<div class="d-table-cell">
+<div class="error-text">
+<h1 style="font-size: 80px; margin-top: 20px;">Choose a business</h1>
+<ul style="list-style-type: none;" >
+    <li *ngFor="let business of Businesses" >
+      <a (click)="onBusinessClick(business)"  style="font-size: 10px; margin-top: 40px; ">{{ business.name }}</a>
+    </li>
+  </ul>
+
+</div>
+</div>
+</div>
+</div>
+</section>
