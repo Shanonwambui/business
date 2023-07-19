@@ -17,14 +17,14 @@ import { SharedService } from '../shared.service';
   styleUrls: ['./items.component.css']
 })
 export class ItemsComponent {
-  @Input() selectedBusiness: Business = { name: '', id: '', repEmail: '', repMobile: '' };
+  @Input() selectedBusiness: Business = { name: '', id: '', repemail: '', repmobile: '' };
 
   categories: Category[] = [];
 
   categoryItems: Item[] = [];
   items: Item[] = []; // Specify the type of 'items' property as 'Item[]'
   types: Type[] = [];
-  
+
 
   constructor(private route: ActivatedRoute, private service:MyService, private router: Router, private dialog: MatDialog, private sharedService: SharedService) {}
 
@@ -38,12 +38,12 @@ export class ItemsComponent {
       }
     );
 
-   
-  
+
+
     const id = this.route.snapshot.paramMap.get('id');
     // Get the stored items from the local storage
     const categoryItems = localStorage.getItem('categoryItems');
-  
+
     if (categoryItems) {
       // Parse the stored items string to an array of items
       this.items = JSON.parse(categoryItems);
@@ -52,7 +52,7 @@ export class ItemsComponent {
       this.service.getItems().subscribe(
         (data: any) => {
           this.items = data as Item[];
-          
+
           // check the 'hasType' property of each item and show the dialog box if it is set to true
           this.items.forEach(item => {
             if (item.hasType) {
@@ -100,7 +100,7 @@ export class ItemsComponent {
 
     console.log('Filtered items:', categoryItems);
 
-  
+
     // Store the filtered items in the local storage
     localStorage.setItem('categoryItems', JSON.stringify(categoryItems));
 
@@ -109,10 +109,10 @@ export class ItemsComponent {
     console.log('localStorage:', localStorage);
 
 
-  
+
     // Navigate to the items page to display the filtered items
     this.router.navigate(['/items']);
   }
 
-  
+
 }

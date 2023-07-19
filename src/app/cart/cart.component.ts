@@ -13,7 +13,7 @@ import { EmptyCartDialogComponentComponent } from '../empty-cart-dialog-componen
 interface CartItem {
   itemId: Item;
   selectedType: Type;
-  selectedAccompaniment: Accompaniment; 
+  selectedAccompaniment: Accompaniment;
   quantity: number;
   total: number;
 }
@@ -24,7 +24,7 @@ interface CartItem {
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit{
-  @Input() selectedBusiness: Business = { name: '', id: '', repEmail: '', repMobile: '' };
+  @Input() selectedBusiness: Business = { name: '', id: '', repemail: '', repmobile: '' };
 
   carts: CartItem[] = [];
   subTotal = 0;
@@ -67,19 +67,19 @@ export class CartComponent implements OnInit{
         () => {
           this.loading = false;
         }
-        
+
       );
     } else {
       this.loading = false;
     }
   }
 
-  
+
   emptyCart() {
     const dialogRef = this.dialog.open(EmptyCartDialogComponentComponent, {
       data: { message: 'Are you sure you want to empty your cart?' }
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'confirm') {
         localStorage.setItem('cartItems', '[]');
@@ -100,7 +100,7 @@ export class CartComponent implements OnInit{
     item.total = item.itemId.price * item.quantity;
     this.subTotal = this.carts.reduce((acc, curr) => acc + curr.total, 0);
   }
-  
+
   decrementQuantity(item: CartItem) {
     let cartItems: { id: string, quantity: number, type?: Type, accompaniment?: Accompaniment }[] = JSON.parse(localStorage.getItem('cartItems') || "[]");
     const itemIndex = cartItems.findIndex((i: { id: string, quantity: number, type?: Type, accompaniment?: Accompaniment }) => i.id === item.itemId.id && i.type?.id === item.selectedType?.id && i.accompaniment?.id === item.selectedAccompaniment?.id);
@@ -116,9 +116,9 @@ export class CartComponent implements OnInit{
     item.total = item.itemId.price * item.quantity;
     this.subTotal = this.carts.reduce((acc, curr) => acc + curr.total, 0);
   }
-  
-  
-  
+
+
+
   removeItem(item: CartItem) {
     const dialogRef = this.dialog.open(EmptyCartDialogComponentComponent, {
       data: { message: 'Are you sure you want to remove this item?' }
@@ -133,7 +133,7 @@ export class CartComponent implements OnInit{
           // Update the cart data in the local storage
           localStorage.setItem("cartItems", JSON.stringify(cartItems));
         }
-  
+
         const index = this.carts.indexOf(item);
         if (index > -1) {
           this.carts.splice(index, 1);
@@ -148,9 +148,9 @@ export class CartComponent implements OnInit{
     const businessId = this.selectedBusiness.id;
     this.router.navigate(['/categories', businessId]);
   }
-  
+
 }
-  
-  
-  
+
+
+
 

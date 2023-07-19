@@ -13,10 +13,10 @@ import { BusinessComponent } from './business/business.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/business', pathMatch: 'full' },
-  { path: 'business/:id', component: BusinessComponent },
+
+
   {path: '', component: HomeComponent},
-  { path: 'categories/:business_id', component: CategoriesComponent },
+  { path: 'categories', component: CategoriesComponent },
   { path: 'cart', component: CartComponent },
   {path: 'items', component: ItemsComponent},
   {path: 'item-card', component: ItemCardComponent},
@@ -24,8 +24,8 @@ const routes: Routes = [
   { path: 'business', component: BusinessComponent },
   {path: 'contact-us', component: ContactUsComponent}
 
-  
- 
+
+
 ];
 
 @NgModule({

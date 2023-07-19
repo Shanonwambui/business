@@ -7,6 +7,8 @@ import { Item } from '../items/item.model';
 import { Category } from '../categories/category.model';
 import { CartItem } from '../cart/cart.model';
 import { SharedService } from '../shared.service';
+import {environment} from "../../environments/environment";
+
 
 @Component({
   selector: 'app-home',
@@ -14,7 +16,7 @@ import { SharedService } from '../shared.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  @Input() selectedBusiness: Business = { name: '', id: '', repEmail: '', repMobile: '' };
+  @Input() selectedBusiness: Business = { name: '', id: '', repemail: '', repmobile: '' };
 
 
   categories: Category[] = [];
@@ -22,82 +24,107 @@ export class HomeComponent implements OnInit {
   categoryItems: Item[] = [];
   categoryImages = [
     {
-      
+
       name: 'PIZZA',
-      imageUrl: 'assets/image/pizza.jpeg'
+      imageUrl: 'assets/image/pizza.png'
     },
     {
-      
+
+      name: 'OTHERS',
+      imageUrl: 'assets/image/others.png'
+    },
+    {
+
+      name: 'SERVICE',
+      imageUrl: 'assets/image/service2.png'
+    },
+    {
+
+      name: 'UNFINISHED',
+      imageUrl: 'assets/image/service2.png'
+    },
+    {
+
+      name: 'DESSERTS',
+      imageUrl: 'assets/img/home-one/feature3.jpg'
+    },
+    {
+
       name: 'SOUPS',
-      imageUrl: 'assets/image/soup.jpeg'
+      imageUrl: 'assets/image/soup.png'
     },
     {
-     
+
       name: 'PASTAS',
-      imageUrl: 'assets/image/pastas.jpeg'
+      imageUrl: 'assets/image/pastas.png'
     },
     {
-      
+
       name: 'JUICES',
-      imageUrl: 'assets/image/juices.jpeg'
+      imageUrl: 'assets/image/juices.png'
     },
     {
-      
+
       name: 'SOFT DRINKS',
       imageUrl: 'assets/image/softdrinks.jpeg'
     },
     {
-      
+
       name: 'BREAKFAST',
       imageUrl: 'assets/image/breakfast.jpeg'
     },
     {
-      
+
       name: 'STARTERS',
       imageUrl: 'assets/image/starters.jpeg'
     },
     {
-      
+
       name: 'SEA FOODS',
-      imageUrl: 'assets/image/seafoods.jpeg'
+      imageUrl: 'assets/image/seafoods.png'
     },
     {
-      
+
       name: 'SWAHILI DISHES',
-      imageUrl: 'assets/image/swahilidishes.jpeg'
+      imageUrl: 'assets/image/swahilidishes.png'
     },
     {
-      
+
       name: 'CHOMA',
-      imageUrl: 'assets/image/choma.jpeg'
+      imageUrl: 'assets/image/choma.png'
     },
   ];
-  
-  Business: Business = {name: "", id: "",repEmail: "",repMobile: ""};
- 
+
+  Business: Business = {name: "", id: "",repemail: "",repmobile: ""};
+
 
   constructor(private service: MyService, private router: Router, private route: ActivatedRoute, private sharedService: SharedService) {
-    
+
   }
 
 
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id')|| environment.businessId;
+
+
 
     this.service.getBusinessId().subscribe(
       (data: any)=>{
-        this.Business = data[0] as Business; // access the first object of the array
-        console.log('Business data:', this.Business);
-        console.log('Business name:', this.Business.name);
-      
+        const matchingBusiness = data.find((business: Business) => business.id === id);
+        if (matchingBusiness) {
+          this.Business = matchingBusiness;
+          console.log('Business data:', this.Business);
+          console.log('Business name:', this.Business.name);
+        }
       },
+
       error => {
         console.error(error);
       }
     );
-   
-  
+
+
     this.service.getCategories().subscribe(
       (data: any) => {
         this.categories = data as Category[];
@@ -139,7 +166,7 @@ export class HomeComponent implements OnInit {
 
     console.log('Filtered items:', categoryItems);
 
-  
+
     // Store the filtered items in the local storage
     localStorage.setItem('categoryItems', JSON.stringify(categoryItems));
 
@@ -148,10 +175,10 @@ export class HomeComponent implements OnInit {
     console.log('localStorage:', localStorage);
 
 
-  
+
     // Navigate to the items page to display the filtered items
     this.router.navigate(['/items']);
   }
 
-  
-}  
+
+}

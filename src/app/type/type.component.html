@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="type.component.css">
+<div class="typedialog">
+  <h2>Select a type</h2>
+  <ul>
+    <li *ngFor="let type of types">
+      <mat-checkbox (click)="onTypeSelected(type)">{{ type.name }}</mat-checkbox>
+    </li>
+  </ul>
+  <button class="btn" (click)="onCancel()">Cancel</button>
+
+</div>
