@@ -10,7 +10,7 @@
   </div>
 
 
-  <div class="navbar-area fixed-top" >
+  <div class="navbar-area fixed-top" *ngIf="showBusiness">
 
   <div class="mobile-nav">
     <a routerLink="/" class="logo" ><b>{{Business.name}}</b></a>
@@ -23,14 +23,14 @@
   <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
   <ul class="navbar-nav">
   <li class="nav-item">
-  <a routerLink="/" class="nav-link active ">Home </a>
+  <a routerLink="/home" class="nav-link active ">Home </a>
 
   </li>
   <li class="nav-item">
   <a class="nav-link">About</a>
   </li>
   <li class="nav-item">
-  <a routerLink="/categories" class="nav-link ">Categories</a>
+  <a routerLink='categories/:business_id' class="nav-link ">Categories</a>
   </li>
   <li class="nav-item">
   <a  class="nav-link dropdown-toggle">Service </a>
@@ -103,7 +103,7 @@
 
 
 
-<footer class="footer-area-two pt-100 pb-70" >
+<footer class="footer-area-two pt-100 pb-70"  *ngIf="showBusiness">
   <div class="container">
   <div class="row">
   <div class="col-sm-6 col-lg-3">

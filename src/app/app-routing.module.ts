@@ -14,13 +14,14 @@ import { BusinessComponent } from './business/business.component';
 
 const routes: Routes = [
 
-
-  {path: '', component: HomeComponent},
-  { path: 'categories', component: CategoriesComponent },
+  { path: '', redirectTo: '/business', pathMatch: 'full' },
+  {path: 'home', component: HomeComponent},
+  { path: 'categories/:business_id', component: CategoriesComponent },
   { path: 'cart', component: CartComponent },
   {path: 'items', component: ItemsComponent},
   {path: 'item-card', component: ItemCardComponent},
   {path: 'checkout', component: CheckoutComponent},
+  { path: 'business/:id', component: BusinessComponent },
   { path: 'business', component: BusinessComponent },
   {path: 'contact-us', component: ContactUsComponent}
 
