@@ -28,6 +28,7 @@ import { ItemCardComponent } from './item-card/item-card.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { HomeComponent } from './home/home.component';
+import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 
 
 
@@ -45,6 +46,7 @@ import { HomeComponent } from './home/home.component';
     CheckoutComponent,
     ContactUsComponent,
     HomeComponent,
+    ComingSoonComponent,
     
     
     

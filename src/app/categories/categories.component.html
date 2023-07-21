@@ -24,16 +24,16 @@
 <div class="col-sm-6 col-lg-4" *ngFor="let category of categories">
 <div class="feature-item">
 <img [src]="getImageUrl(category.name)" [alt]="category.name">
-<div class="feature-inner" (click)="selectItemsByCategory(category.id)">
-<ul >
+<div class="feature-inner" >
+<ul (click)="selectItemsByCategory(category.id)">
 <li>
 <img src="assets/img/home-one/feature1.png" alt="Feature">
 </li>
 <li>
-<span>{{ category.name }}</span>
+<span class="name">{{ category.name }}</span>
 </li>
 <li>
-<a href="#">
+<a >
 <i class='bx bx-right-arrow-alt'></i>
 </a>
 </li>

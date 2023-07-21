@@ -24,7 +24,7 @@ export class AppComponent implements OnInit{
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const currentRoute = this.router.url;
-        this.showBusiness = currentRoute.includes('/categories') || currentRoute.includes('/items') || currentRoute.includes('/cart') || currentRoute.includes('/home')|| currentRoute.includes('/contact-us') || currentRoute.includes('/checkout');
+        this.showBusiness = currentRoute.includes('/categories') || currentRoute.includes('/items') || currentRoute.includes('/cart') || currentRoute.includes('/home')|| currentRoute.includes('/contact-us') || currentRoute.includes('/checkout')|| currentRoute.includes('/coming-soon');
       }
     });
 
