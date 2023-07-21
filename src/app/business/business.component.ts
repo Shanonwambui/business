@@ -11,10 +11,12 @@ import { BusinessServiceService } from '../business-service.service';
 })
 export class BusinessComponent implements OnInit{
 
+  @Output() businessSelected = new EventEmitter<boolean>();
+
   Businesses: Business[] =[];
 
   constructor(private service: MyService, private router: Router, private route: ActivatedRoute, private businessService: BusinessServiceService){}
-  
+
   ngOnInit(): void {
     this.service.getBusinessId().subscribe(
       (data: any)=>{
@@ -31,7 +33,7 @@ export class BusinessComponent implements OnInit{
     console.log('Business selected:', business.name);
     this.businessService.businessSelected.emit(business); // Emit the selected business
     // additional code to handle the selected business
-    this.router.navigate(['/categories', business.id]); // navigate to the business app with the business ID as a parameter
+    this.router.navigate(['/home', business.id]); // navigate to the business app with the business ID as a parameter
   }
 
 }
