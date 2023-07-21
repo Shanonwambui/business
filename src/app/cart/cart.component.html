@@ -23,7 +23,7 @@
 <table class="table">
 <thead class="thead">
 <tr>
- 
+
 <th class="table-head" scope="col">Items</th>
 <th class="table-head" scope="col">Type</th>
 <th class="table-head" scope="col">Quantity</th>
@@ -38,10 +38,10 @@
 
 <td>{{ item.selectedType.name }}</td>
 
-<td class="quantity"> 
-    <button  (click)="incrementQuantity(item)"><i class="fa-regular fa-square-plus"></i></button>
+<td class="quantity">
+  <span class="plus" (click)="incrementQuantity(item)">+</span>
     {{ item.quantity }}
-    <button (click)="decrementQuantity(item)"><i class="fa-regular fa-square-minus"></i></button>
+  <span class="minus" (click)="decrementQuantity(item)">-</span>
 </td>
 <td>{{ item.itemId.price }}</td>
 <td class="text-right">
