@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { MyService } from '../my.service';
@@ -8,6 +8,7 @@ import { Category } from '../categories/category.model';
 import { CartItem } from '../cart/cart.model';
 import { SharedService } from '../shared.service';
 import {environment} from "../../environments/environment";
+import {BusinessServiceService} from "../business-service.service";
 
 
 @Component({
@@ -16,8 +17,7 @@ import {environment} from "../../environments/environment";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  @Input() selectedBusiness: Business = { name: '', id: '', repemail: '', repmobile: '' };
-
+  selectedBusinessName: string | null = null;
 
   categories: Category[] = [];
   items: Item[] = [];
@@ -98,7 +98,7 @@ export class HomeComponent implements OnInit {
   Business: Business = {name: "", id: "",repemail: "",repmobile: ""};
 
 
-  constructor(private service: MyService, private router: Router, private route: ActivatedRoute, private sharedService: SharedService) {
+  constructor(private service: MyService, private router: Router, private route: ActivatedRoute, private sharedService: SharedService, private businessService: BusinessServiceService) {
 
   }
 
@@ -123,6 +123,12 @@ export class HomeComponent implements OnInit {
         console.error(error);
       }
     );
+
+    this.route.queryParams.subscribe(params => {
+      this.selectedBusinessName = params['business'];
+      // Now you can use this.selectedBusinessName in your component's logic.
+      console.log('the selected business is:',this.selectedBusinessName)
+    });
 
 
     this.service.getCategories().subscribe(

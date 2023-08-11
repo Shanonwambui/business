@@ -34,9 +34,10 @@
   <li>
   <div class="number">
   <span class="minus" (click)="removeQuantity()">-</span>
-  <input type="text" class="form-control" value="1" />
+  <input type="text" class="form-control" [value]="getQuantity()" />
   <span class="plus" (click)="addToCart()">+</span>
   </div>
   </li>
   </ul>
   </div>
+</div>

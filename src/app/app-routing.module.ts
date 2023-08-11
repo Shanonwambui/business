@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { CategoriesComponent } from './categories/categories.component';
 import { CartComponent } from './cart/cart.component';
 
@@ -14,8 +15,8 @@ import {ComingSoonComponent} from "./coming-soon/coming-soon.component";
 
 const routes: Routes = [
 
-  /*{ path: '', redirectTo: '/business', pathMatch: 'full' },*/
-  {path: '', component: HomeComponent},
+  { path: '', redirectTo: '/business', pathMatch: 'full' },
+  {path: 'home', component: HomeComponent},
   { path: 'home/:business_id', component: HomeComponent },
   { path: 'categories', component: CategoriesComponent },
   { path: 'cart', component: CartComponent },

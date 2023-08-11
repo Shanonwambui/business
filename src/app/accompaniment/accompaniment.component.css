@@ -1,0 +1,26 @@
+.accompanimentdialog{
+  color: black;
+
+
+
+}
+
+ul{
+  list-style: none;
+}
+
+h2{
+  margin-top: 2rem;
+}
+
+
+
+@media screen and (max-width:460px) {
+  .accompanimentdialog{
+    color: black;
+    background-color: white;
+
+  }
+
+
+}
