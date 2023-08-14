@@ -17,7 +17,8 @@ import {BusinessServiceService} from "../business-service.service";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  selectedBusinessName: string | null = null;
+  selectedBusiness: Business | undefined = undefined;
+
 
   categories: Category[] = [];
   items: Item[] = [];
@@ -95,7 +96,6 @@ export class HomeComponent implements OnInit {
     },
   ];
 
-  Business: Business = {name: "", id: "",repemail: "",repmobile: ""};
 
 
   constructor(private service: MyService, private router: Router, private route: ActivatedRoute, private sharedService: SharedService, private businessService: BusinessServiceService) {
@@ -105,29 +105,12 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id')|| environment.businessId;
-
-
-
-    this.service.getBusinessId().subscribe(
-      (data: any)=>{
-        const matchingBusiness = data.find((business: Business) => business.id === id);
-        if (matchingBusiness) {
-          this.Business = matchingBusiness;
-          console.log('Business data:', this.Business);
-          console.log('Business name:', this.Business.name);
-        }
-      },
-
-      error => {
-        console.error(error);
-      }
-    );
-
     this.route.queryParams.subscribe(params => {
-      this.selectedBusinessName = params['business'];
-      // Now you can use this.selectedBusinessName in your component's logic.
-      console.log('the selected business is:',this.selectedBusinessName)
+      const businessId = params['business'];
+      if (businessId) {
+        // Fetch the selected business using its ID, assuming you have a service for that
+        this.selectedBusiness = this.businessService.getSelectedBusiness();
+      }
     });
 
 
