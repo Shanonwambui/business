@@ -4,8 +4,8 @@ export interface Category {
     description: string;
     image: string;
     categoryId: string;
-    
-    
-    
+    isActive: boolean;
+
+
+
   }
-  
