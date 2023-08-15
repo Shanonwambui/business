@@ -1,5 +1,5 @@
 
-    
+
     <div class="page-title-area page-title-img-one">
     <div class="container">
     <div class="page-title-item">
@@ -16,29 +16,28 @@
     </div>
     </div>
     </div>
-    
-    
+
+
     <section class="collection-area collection-area-two pt-100 pb-70">
     <div class="container">
     <div class="sorting-menu" >
     <ul >
-        <li class="filter active" data-filter="all">All</li>
-        <li class="filter" *ngFor="let category of categories" (click)="selectItemsByCategory(category.id)">
+
+        <li  class="item"  [class.active]="category.isActive" *ngFor="let category of categories"  (click)="selectItemsByCategory(category)">
           {{ category.name }}
         </li>
-        
+
     </ul>
     </div>
     <div id="Container" class="row" >
-    <div class="col-sm-6 col-lg-3 mix " *ngFor="let item of items">
+    <div class="col-sm-6 col-lg-3 mix " *ngFor="let item of categoryItems">
         <app-item-card [item]="item"></app-item-card>
     </div>
-   
-    
-    
+
+
+
     </div>
     </div>
     </section>
-    
-    
-   
+
+

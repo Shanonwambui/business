@@ -103,20 +103,6 @@ export class CategoriesComponent implements OnInit{
 
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-
-    this.service.getBusinessId().subscribe(
-      (data: any)=>{
-        this.Business = data[0] as Business; // access the first object of the array
-        console.log('Business data:', this.Business);
-        console.log('Business name:', this.Business.name);
-
-      },
-      error => {
-        console.error(error);
-      }
-    );
-
 
     this.service.getCategories().subscribe(
       (data: any) => {

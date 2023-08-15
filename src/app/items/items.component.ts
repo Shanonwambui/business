@@ -18,7 +18,7 @@ import { SharedService } from '../shared.service';
 })
 export class ItemsComponent {
   @Input() selectedBusiness: Business = { name: '', id: '', repemail: '', repmobile: '' };
-
+  isActive: boolean = false;
   categories: Category[] = [];
 
   categoryItems: Item[] = [];
@@ -32,6 +32,17 @@ export class ItemsComponent {
     this.service.getCategories().subscribe(
       (data: any) => {
         this.categories = data as Category[];
+        // Initialize isActive to false for all categories
+        this.categories.forEach(category => category.isActive = false);
+
+      },
+      error => {
+        console.error(error);
+      }
+    );
+    this.service.getItems().subscribe(
+      (data: any) => {
+        this.items = data as Item[];
       },
       error => {
         console.error(error);
@@ -46,40 +57,7 @@ export class ItemsComponent {
 
     if (categoryItems) {
       // Parse the stored items string to an array of items
-      this.items = JSON.parse(categoryItems);
-    } else {
-      // If no items are stored, get all the items from the service
-      this.service.getItems().subscribe(
-        (data: any) => {
-          this.items = data as Item[];
-
-          // check the 'hasType' property of each item and show the dialog box if it is set to true
-          this.items.forEach(item => {
-            if (item.hasType) {
-              this.service.getTypes().subscribe(
-                (data: any) => {
-                  this.types = data as Type[];
-                  // show the dialog box
-                  const dialogRef = this.dialog.open(TypeComponent, {
-                    data: { types: this.types }
-                  });
-                  dialogRef.afterClosed().subscribe(result => {
-                    if (result) {
-                      item.selectedType = result;
-                    }
-                  });
-                },
-                error => {
-                  console.error(error);
-                }
-              );
-            }
-          });
-        },
-        error => {
-          console.error(error);
-        }
-      );
+      this.categoryItems = JSON.parse(categoryItems);
     }
 
   }
@@ -93,26 +71,24 @@ export class ItemsComponent {
     return count;
   }
 
-  selectItemsByCategory(category: string): void {
-    console.log('Selected category:', category);
+
+  selectItemsByCategory(selectedCategory: Category): void {
+    // Reset isActive for all categories
+    this.categories.forEach(category => category.isActive = false);
+
+    // Set isActive only for the selected category
+    selectedCategory.isActive = true;
+
     // Filter the items array based on the selected category
-    const categoryItems = this.items.filter(i => i.category === category);
+    this.categoryItems = this.items.filter(i => i.category === selectedCategory.id);
 
-    console.log('Filtered items:', categoryItems);
-
-
-    // Store the filtered items in the local storage
-    localStorage.setItem('categoryItems', JSON.stringify(categoryItems));
-
-    console.log('JSON string:', JSON.stringify(categoryItems));
-
-    console.log('localStorage:', localStorage);
+    console.log('Filtered items:', this.categoryItems);
 
 
 
-    // Navigate to the items page to display the filtered items
-    this.router.navigate(['/items']);
   }
+
+
 
 
 }

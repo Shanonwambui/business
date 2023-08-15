@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Business} from "../business/business.model";
-import {environment} from "../../environments/environment";
+import {BusinessServiceService} from "../business-service.service";
 import {MyService} from "../my.service";
 import {ActivatedRoute} from "@angular/router";
+import {Router} from "@angular/router";
+
 
 
 @Component({
@@ -12,30 +14,21 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class ContactUsComponent implements OnInit{
 
-  Business :Business = {name: "", id: "", repemail:"", repmobile: ""}
+  selectedBusiness: Business | undefined = undefined;
 
-  constructor(private service: MyService, private route: ActivatedRoute) {
+  constructor(private service: MyService,private router: Router, private route: ActivatedRoute, private businessService: BusinessServiceService) {
   }
 
-  ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id') || environment.businessId;
-
-
-    this.service.getBusinessId().subscribe(
-      (data: any)=>{
-        const matchingBusiness = data.find((business: Business) => business.id === id);
-        if (matchingBusiness) {
-          this.Business = matchingBusiness;
-          console.log('Business data:', this.Business);
-          console.log('Business name:', this.Business.name);
-        }
-      },
-      error => {
-        console.error(error);
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      const businessId = params['business'];
+      if (businessId) {
+        // Fetch the selected business using its ID, assuming you have a service for that
+        this.selectedBusiness = this.businessService.getSelectedBusiness();
       }
-    )
+    });
+
 
   }
-
 
 }

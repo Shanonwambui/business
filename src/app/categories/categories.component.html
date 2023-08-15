@@ -21,11 +21,11 @@
 <div class="feature-area pt-100 pb-70">
 <div class="container">
 <div class="row">
-<div class="col-sm-6 col-lg-4" *ngFor="let category of categories">
+<div class="col-sm-6 col-lg-4" *ngFor="let category of categories" (click)="selectItemsByCategory(category.id)">
 <div class="feature-item">
 <img [src]="getImageUrl(category.name)" [alt]="category.name">
 <div class="feature-inner" >
-<ul (click)="selectItemsByCategory(category.id)">
+<ul >
 <li>
 <img src="assets/img/home-one/feature1.png" alt="Feature">
 </li>

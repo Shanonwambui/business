@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { CartItem } from './cart/cart.model';
-import {environment} from "../environments/environment";
 import {MyService} from "./my.service";
 import {Business} from "./business/business.model";
 import {ActivatedRoute} from "@angular/router";
