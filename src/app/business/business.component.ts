@@ -29,8 +29,7 @@ export class BusinessComponent implements OnInit{
 
   onBusinessClick(business: Business) {
 
-    this.businessService.setSelectedBusiness(business); // Use the service to set the selected business
-    // Navigating with the selected business name as a query parameter
+    this.businessService.setSelectedBusiness(business);
     this.router.navigate(['/home'], { queryParams: { business: business.id } });
   }
 
