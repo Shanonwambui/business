@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Router } from '@angular/router';
+
 import { CategoriesComponent } from './categories/categories.component';
 import { CartComponent } from './cart/cart.component';
-import { HttpClient } from '@angular/common/http';
+
 import { ItemsComponent } from './items/items.component';
 import { ItemCardComponent } from './item-card/item-card.component';
 import { CheckoutComponent } from './checkout/checkout.component';

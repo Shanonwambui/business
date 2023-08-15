@@ -1,11 +1,17 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { Business } from './business/business.model';
+import { Injectable } from '@angular/core';
+import {Business} from "./business/business.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BusinessServiceService {
-  businessSelected = new EventEmitter<Business>();
+  private selectedBusiness: Business | undefined; // Initialize with undefined
 
-  constructor() { }
+  setSelectedBusiness( business : Business) {
+    this.selectedBusiness = business;
+  }
+
+  getSelectedBusiness() {
+    return this.selectedBusiness;
+  }
 }

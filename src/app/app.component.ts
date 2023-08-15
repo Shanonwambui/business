@@ -5,6 +5,7 @@ import {environment} from "../environments/environment";
 import {MyService} from "./my.service";
 import {Business} from "./business/business.model";
 import {ActivatedRoute} from "@angular/router";
+import {BusinessServiceService} from "./business-service.service";
 
 @Component({
   selector: 'app-root',
@@ -13,14 +14,15 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class AppComponent implements OnInit{
   title = 'testing5';
+  selectedBusiness: Business | undefined = undefined;
 
   showBusiness = false;
 
-  Business: Business = {name: "", id: "",repemail: "",repmobile: ""};
 
-  constructor(private service: MyService, private route: ActivatedRoute, private router: Router) {}
+
+  constructor(private service: MyService, private route: ActivatedRoute, private router: Router, private businessService: BusinessServiceService) {}
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id') || environment.businessId;
+
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const currentRoute = this.router.url;
@@ -28,22 +30,15 @@ export class AppComponent implements OnInit{
       }
     });
 
-
-
-    this.service.getBusinessId().subscribe(
-      (data: any)=>{
-        const matchingBusiness = data.find((business: Business) => business.id === id);
-        if (matchingBusiness) {
-          this.Business = matchingBusiness;
-          console.log('Business data:', this.Business);
-          console.log('Business name:', this.Business.name);
-          console.log('Business mobile:', this.Business.repmobile)
-        }
-      },
-      error => {
-        console.error(error);
+    this.route.queryParams.subscribe(params => {
+      const businessId = params['business'];
+      if (businessId) {
+        // Fetch the selected business using its ID, assuming you have a service for that
+        this.selectedBusiness = this.businessService.getSelectedBusiness();
       }
-    )
+    });
+
+
 
   }
 
@@ -55,4 +50,5 @@ export class AppComponent implements OnInit{
     }
     return count;
   }
+
 }

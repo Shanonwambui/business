@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Business } from './business.model';
 import { MyService } from '../my.service';
 import { Router } from '@angular/router';
@@ -10,8 +10,6 @@ import { BusinessServiceService } from '../business-service.service';
   styleUrls: ['./business.component.css']
 })
 export class BusinessComponent implements OnInit{
-
-  @Output() businessSelected = new EventEmitter<boolean>();
 
   Businesses: Business[] =[];
 
@@ -30,10 +28,9 @@ export class BusinessComponent implements OnInit{
   }
 
   onBusinessClick(business: Business) {
-    console.log('Business selected:', business.name);
-    this.businessService.businessSelected.emit(business); // Emit the selected business
-    // additional code to handle the selected business
-    this.router.navigate(['/home', business.id]); // navigate to the business app with the business ID as a parameter
+
+    this.businessService.setSelectedBusiness(business);
+    this.router.navigate(['/home'], { queryParams: { business: business.id } });
   }
 
 }

@@ -13,13 +13,13 @@
   <div class="navbar-area fixed-top" *ngIf="showBusiness">
 
   <div class="mobile-nav">
-    <a routerLink="/" class="logo" ><b>{{Business.name}}</b></a>
+    <a routerLink="/" class="logo" ><b>{{ selectedBusiness?.name }}</b></a>
   </div>
 
   <div class="main-nav main-nav-three">
   <div class="container">
   <nav class="navbar navbar-expand-md navbar-light">
-    <a routerLink="/" class="logo" ><b>{{Business.name}}</b></a>
+    <a routerLink="/" class="logo" ><b>{{ selectedBusiness?.name }}</b></a>
   <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
   <ul class="navbar-nav">
   <li class="nav-item">
@@ -81,7 +81,7 @@
   </a>
   <a class="nav-tel" >
   <i class='bx bxs-phone-call'></i>
-    {{Business.repmobile}}
+    {{selectedBusiness?.repmobile}}
   </a>
   </div>
   </div>
@@ -107,7 +107,7 @@
   <div class="col-sm-6 col-lg-3">
   <div class="footer-item">
    <div class="footer-logo">
-     <a routerLink="/" class="navbar-brand" ><b>{{Business.name}}</b></a>
+     <a routerLink="/" class="navbar-brand" ><b>{{ selectedBusiness?.name }}</b></a>
    <div class="footer-subscribe footer-subscriber-two">
   <input type="email" class="form-control" placeholder="Enter your email">
   <button type="submit" class="btn footer-btn">
@@ -204,13 +204,13 @@
   <li>
   <a >
   <i class='bx bx-phone-call'></i>
-    {{Business.repmobile}}
+    {{selectedBusiness?.repmobile}}
   </a>
   </li>
   <li>
   <a href="https://templates.hibootstrap.com/cdn-cgi/l/email-protection#5e373038311e2c3b2d2a3f302a703d3133">
   <i class='bx bx-message-detail'></i>
-  <span class="__cf_email__" data-cfemail="2e474048416e5c4b5d5a4f405a004d4143">{{Business.repemail}}</span>
+  <span class="__cf_email__" data-cfemail="2e474048416e5c4b5d5a4f405a004d4143">{{selectedBusiness?.repemail}}</span>
   </a>
   </li>
 

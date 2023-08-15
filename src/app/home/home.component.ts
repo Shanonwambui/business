@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { MyService } from '../my.service';
@@ -8,6 +8,7 @@ import { Category } from '../categories/category.model';
 import { CartItem } from '../cart/cart.model';
 import { SharedService } from '../shared.service';
 import {environment} from "../../environments/environment";
+import {BusinessServiceService} from "../business-service.service";
 
 
 @Component({
@@ -16,7 +17,7 @@ import {environment} from "../../environments/environment";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  @Input() selectedBusiness: Business = { name: '', id: '', repemail: '', repmobile: '' };
+  selectedBusiness: Business | undefined = undefined;
 
 
   categories: Category[] = [];
@@ -95,34 +96,22 @@ export class HomeComponent implements OnInit {
     },
   ];
 
-  Business: Business = {name: "", id: "",repemail: "",repmobile: ""};
 
 
-  constructor(private service: MyService, private router: Router, private route: ActivatedRoute, private sharedService: SharedService) {
+  constructor(private service: MyService, private router: Router, private route: ActivatedRoute, private sharedService: SharedService, private businessService: BusinessServiceService) {
 
   }
 
 
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id')|| environment.businessId;
-
-
-
-    this.service.getBusinessId().subscribe(
-      (data: any)=>{
-        const matchingBusiness = data.find((business: Business) => business.id === id);
-        if (matchingBusiness) {
-          this.Business = matchingBusiness;
-          console.log('Business data:', this.Business);
-          console.log('Business name:', this.Business.name);
-        }
-      },
-
-      error => {
-        console.error(error);
+    this.route.queryParams.subscribe(params => {
+      const businessId = params['business'];
+      if (businessId) {
+        // Fetch the selected business using its ID, assuming you have a service for that
+        this.selectedBusiness = this.businessService.getSelectedBusiness();
       }
-    );
+    });
 
 
     this.service.getCategories().subscribe(
